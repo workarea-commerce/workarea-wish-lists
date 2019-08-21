@@ -1,0 +1,10 @@
+module Workarea
+  decorate Metrics::ProductByDay, with: :wish_lists do
+    decorated do
+      field :wish_list_adds, type: Integer, default: 0
+      field :wish_list_deletes, type: Integer, default: 0
+      field :wish_list_units_sold, type: Integer, default: 0
+      field :wish_list_revenue, type: Float, default: 0.0
+    end
+  end
+end

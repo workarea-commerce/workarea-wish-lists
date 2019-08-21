@@ -1,12 +1,14 @@
 - @title = t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
 
+= render_schema_org(breadcrumb_list_schema([[t('workarea.storefront.layouts.home'), root_path], [t('workarea.storefront.wish_lists.find_title'), wish_lists_path], [@wish_list.name, wish_list_path(@wish_list)]]))
+
 - content_for :breadcrumbs do
   %p.breadcrumbs__node-group
-    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }
+    %span.breadcrumbs__node
       = link_to t('workarea.storefront.layouts.home'), root_path, rel: 'home'
-    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }
+    %span.breadcrumbs__node
       = link_to t('workarea.storefront.wish_lists.find_title'), wish_lists_path
-    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }= t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
+    %span.breadcrumbs__node= t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
 
 .wish-lists.view
 
@@ -30,6 +32,8 @@
 
       %ul.product-list
         - @wish_list.items.each do |item|
+          = render_schema_org(product_schema(item.product))
+
           %li.product-list__item
             .product-list__item-cell
               .product-list__summary
@@ -47,6 +51,7 @@
             = form_tag cart_items_path, class: 'product-list__item-cell', data: { dialog_form: { dialogOptions: { closeAll: true, initModules: true } }, analytics: add_to_cart_analytics_data(item.product).to_json } do
               = hidden_field_tag :product_id, item.product_id, id: nil
               = hidden_field_tag :sku, item.sku, id: nil
+              = hidden_field_tag :via, @wish_list.to_gid_param, id: nil
               - item.customizations.each do |param, value|
                 = hidden_field_tag param, value, id: nil
               %table.table

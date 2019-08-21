@@ -1,0 +1,24 @@
+module Workarea
+  decorate OrderMetrics, with: :wish_lists do
+    def products_from_wish_lists
+      @products_from_wish_lists ||=
+        wish_list_items
+          .group_by(&:product_id)
+          .transform_values do |items|
+            values = calculate_based_on_items(items)
+
+            {
+              wish_list_units_sold: values[:units_sold],
+              wish_list_revenue: values[:revenue]
+            }
+          end
+    end
+
+    def wish_list_items
+      @wish_list_items ||= items.select do |item|
+        via = GlobalID.parse(item.via)
+        via.present? && via.model_class.name == 'Workarea::WishList'
+      end
+    end
+  end
+end

@@ -19,6 +19,26 @@ en:
           state: State
           title: Wish list for %{user}
           title_html: Wish list for %{user}
+      fields:
+        adds: Adds
+        deletes: Deletes
+      insights:
+        most_wish_listed_products:
+          title: Most Wish Listed Products
+          info: Your products most frequently added to a wish list.
+          times:
+            one: '%{count} time'
+            other: '%{count} times'
+      reports:
+        reference:
+          adds:
+            name: Adds
+            description: The total number of items added to a list.
+          deletes:
+            name: Deletes
+            description: The total number of items deleted from a list
+        wish_list_products:
+          title: Wish List Products
     storefront:
       flash_messages:
         item_moved_to_wish_list: This item has been moved to your wish list

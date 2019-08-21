@@ -3,6 +3,10 @@ Workarea::Admin::Engine.routes.draw do
     resources :users, only: [] do
       get :wish_list
     end
+
+    resource :report, only: [] do
+      get :wish_list_products
+    end
   end
 end
 
@@ -19,5 +23,8 @@ Workarea::Storefront::Engine.routes.draw do
         delete 'remove_item', as: :remove_from
       end
     end
+
+    post 'analytics/wish_list_add/:product_id', to: 'analytics#wish_list_add', as: :analytics_wish_list_add
+    post 'analytics/wish_list_remove/:product_id', to: 'analytics#wish_list_remove', as: :analytics_wish_list_remove
   end
 end

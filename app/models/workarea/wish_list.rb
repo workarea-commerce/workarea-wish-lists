@@ -1,7 +1,6 @@
 module Workarea
   class WishList
-    include Mongoid::Document
-    include Mongoid::Timestamps
+    include ApplicationDocument
     include UrlToken
 
     class InvalidToken < StandardError; end

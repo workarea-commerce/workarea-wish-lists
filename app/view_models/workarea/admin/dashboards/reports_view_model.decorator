@@ -1,0 +1,10 @@
+module Workarea
+  decorate Admin::Dashboards::ReportsViewModel, with: :wish_lists do
+    def wish_list_products
+      @wish_list_products ||= Admin::Reports::WishListProductsViewModel.wrap(
+        Workarea::Reports::WishListProducts.new(options),
+        options
+      )
+    end
+  end
+end

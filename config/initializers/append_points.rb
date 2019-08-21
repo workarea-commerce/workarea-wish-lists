@@ -12,7 +12,8 @@ Workarea.append_javascripts(
 Workarea.append_javascripts(
   'storefront.modules',
   'workarea/storefront/wish_lists/modules/wish_list_button',
-  'workarea/storefront/wish_lists/modules/wish_list_public_quantity_fields'
+  'workarea/storefront/wish_lists/modules/wish_list_public_quantity_fields',
+  'workarea/storefront/wish_lists/modules/wish_list_analytics'
 )
 
 Workarea.append_partials(
@@ -43,4 +44,9 @@ Workarea.append_partials(
 Workarea.append_partials(
   'admin.user_cards',
   'workarea/admin/users/wish_list_card'
+)
+
+Workarea.append_partials(
+  'admin.reports_dashboard',
+  'workarea/admin/dashboards/wish_list_products_card'
 )

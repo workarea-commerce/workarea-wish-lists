@@ -1,0 +1,17 @@
+module Workarea
+  decorate Storefront::AnalyticsController, with: :wish_lists do
+    def wish_list_add
+      Metrics::ProductByDay.inc(
+        key: { product_id: params[:product_id] },
+        wish_list_adds: 1
+      )
+    end
+
+    def wish_list_remove
+      Metrics::ProductByDay.inc(
+        key: { product_id: params[:product_id] },
+        wish_list_deletes: 1
+      )
+    end
+  end
+end

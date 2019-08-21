@@ -1,7 +1,6 @@
 module Workarea
   class WishList::Item
-    include Mongoid::Document
-    include Mongoid::Timestamps
+    include ApplicationDocument
 
     field :product_id, type: String
     field :quantity, type: Integer, default: 1

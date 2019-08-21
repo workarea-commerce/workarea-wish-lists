@@ -1,4 +1,4 @@
 .wish-list-button
   - if product.purchasable?
-    = link_to users_wish_list_path, class: 'wish-list-button__link text-button', data: { wish_list_button: '' } do
+    = link_to users_wish_list_path, class: 'wish-list-button__link text-button', data: { wish_list_button: '', analytics: add_to_wish_list_analytics_data(product).to_json } do
       = t('workarea.storefront.wish_lists.add_to_wish_list')

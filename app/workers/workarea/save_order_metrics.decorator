@@ -1,0 +1,21 @@
+module Workarea
+  decorate SaveOrderMetrics, with: :wish_lists do
+    class_methods do
+      def save_catalog(metrics)
+        super
+
+        save_wish_lists(metrics)
+      end
+
+      def save_wish_lists(metrics)
+        metrics.products_from_wish_lists.each do |product_id, data|
+          Metrics::ProductByDay.inc(
+            key: { product_id: product_id },
+            at: metrics.placed_at,
+            **data
+          )
+        end
+      end
+    end
+  end
+end

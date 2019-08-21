@@ -13,9 +13,20 @@ module Workarea
           next unless sku
           wish_list.add_item(product.id, sku, quantity)
 
+          Metrics::ProductByDay.inc(
+            key: { product_id: product.id },
+            wish_list_adds: 1
+          )
+
           if rand(2).zero?
             purchased_quantity = rand(quantity) + 1
             wish_list.mark_item_purchased(sku, purchased_quantity)
+
+            Metrics::ProductByDay.inc(
+              key: { product_id: product.id },
+              wish_list_units_sold: purchased_quantity,
+              wish_list_revenue: rand(10000) / 100.0
+            )
           end
         end
       end

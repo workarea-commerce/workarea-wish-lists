@@ -10,6 +10,12 @@ module Workarea
              .action_dispatch
              .rescue_responses['Workarea::WishList::InvalidToken'] = :not_found
       end
+
+      config.to_prepare do
+        Workarea::Storefront::ApplicationController.helper(
+          Workarea::Storefront::WishListAnalyticsHelper
+        )
+      end
     end
   end
 end
