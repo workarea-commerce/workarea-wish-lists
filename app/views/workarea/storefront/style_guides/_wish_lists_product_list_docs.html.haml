@@ -1,0 +1,158 @@
+%p Cart items with wish list plugin:
+
+.style-guide__example-block
+  %ul.product-list
+    %li.product-list__item
+      .product-list__item-cell
+        .product-list__summary
+          %p.product-list__media= link_to(image_tag('workarea/storefront/style_guide_product.jpg', alt: 'Product Name', class: 'product-list__media-image'), '#', class: 'product-list__media-link')
+          .product-list__info
+            %p.product-list__name= link_to('Product Name', '#')
+            %p.product-list__id 1234
+            .product-list__option-group
+              %p.product-list__option Color: Blue
+              %p.product-list__option Size: Small
+        .grid.grid--auto.grid--middle
+          = form_tag nil, class: 'grid__cell' do
+            %p= button_tag 'Remove', class: 'text-button'
+          = form_tag nil, class: 'grid__cell' do
+            %p= button_tag 'Move to Wish List', class: 'text-button'
+      .product-list__item-cell
+        %table.table
+          %thead
+            %tr
+              %th.table__prices Price
+              %th.table__quantity Qty
+              %th.table__prices Total
+          %tbody
+            %tr
+              %td.table__prices
+                %p.table__price
+                  %span.table__price-label Now:
+                  %strong.table__price-discount= number_to_currency(90.00)
+                %p.table__price
+                  %span.table__price-label Was:
+                  %s= number_to_currency(100.00)
+                %p.table__price
+                  %span.table__price-label Customizations:
+                  %span= number_to_currency(10.00)
+              %td.table__quantity
+                = form_tag nil, class: 'inline-form' do
+                  .inline-form__cell
+                    .value= number_field_tag 'wl_table_cart_item_quantity', 1, min: 1, required: true, class: 'text-box text-box--x-small', data: { form_submitting_control: '' }, title: 'Quantity', id: nil
+                  %p.inline-form__cell.hidden-if-js-enabled= button_tag 'Update', value: 'change_quantity', class: 'button'
+              %td.table__prices
+                %p.table__price
+                  %span.table__price-label Subtotal:
+                  %span= number_to_currency(100.00)
+                %p.table__price
+                  %span.table__price-label Gift Wrap:
+                  %span= number_to_currency(10.00)
+                %p.table__price
+                  %span.table__price-label Item Level Discount:
+                  %strong.table__price-discount −#{number_to_currency(5.00)}
+                %p.table__price
+                  %span.table__price-label An Item Level Discount With a Longer Name Than the Last:
+                  %strong.table__price-discount −#{number_to_currency(5.00)}
+                %p.table__price
+                  %span.table__price-label Total:
+                  %span= number_to_currency(100.00)
+    %li.product-list__item
+      .product-list__item-cell
+        .product-list__summary
+          %p.product-list__media= link_to(image_tag('workarea/storefront/style_guide_product.jpg', alt: 'Product Name', class: 'product-list__media-image'), '#', class: 'product-list__media-link')
+          .product-list__info
+            %p.product-list__name= link_to('Product Name', '#')
+      .product-list__item-cell
+        %table.table
+          %thead
+            %tr
+              %th.table__prices Price
+              %th.table__quantity Qty
+              %th.table__prices Total
+          %tbody
+            %tr
+              %td.table__prices
+                %p.table__price
+                  %span Free Gift!
+              %td.table__quantity
+                %p 1
+              %td.table__prices
+                %p.table__price
+                  %span Free Gift!
+
+%p Public wish list (plugin):
+
+.style-guide__example-block
+  %ul.product-list
+    - 2.times do
+      %li.product-list__item
+        .product-list__item-cell
+          .product-list__summary
+            %p.product-list__media= link_to(image_tag('workarea/storefront/style_guide_product.jpg', alt: 'Product Name', class: 'product-list__media-image'), '#', class: 'product-list__media-link')
+            .product-list__info
+              %p.product-list__name= link_to('Product Name', '#')
+              %p.product-list__id 1234
+              .product-list__option-group
+                %p.product-list__option Color: Blue
+                %p.product-list__option Size: Small
+        = form_tag nil, class: 'product-list__item-cell' do
+          %table.table
+            %thead
+              %tr
+                %th.table__prices Price
+                %th.table__quantity Qty
+                %th.table__prices Total
+            %tbody
+              %tr
+                %td.table__prices
+                  %p.table__price
+                    = number_to_currency(90.00)
+                %td.table__quantity
+                  %p.value= number_field_tag 'wl_table_cart_item_quantity', 1, min: 1, required: true, class: 'text-box text-box--x-small', data: { form_submitting_control: '' }, title: 'Quantity', id: nil
+                %td.table__prices
+                  %p.table__price
+                    = number_to_currency(90.00)
+          .grid.grid--auto.grid--middle
+            %p.grid__cell= button_tag 'Add to Shopping Bag', class: 'button'
+
+%p Private wish list (plugin):
+
+.style-guide__example-block
+  %ul.product-list
+    - 2.times do
+      %li.product-list__item
+        .product-list__item-cell
+          .product-list__summary
+            %p.product-list__media= link_to(image_tag('workarea/storefront/style_guide_product.jpg', alt: 'Product Name', class: 'product-list__media-image'), '#', class: 'product-list__media-link')
+            .product-list__info
+              %p.product-list__name= link_to('Product Name', '#')
+              %p.product-list__id 1234
+              .product-list__option-group
+                %p.product-list__option Color: Blue
+                %p.product-list__option Size: Small
+        .product-list__item-cell
+          %table.table
+            %thead
+              %tr
+                %th.product-list__prices Price
+                %th.product-list__quantity Qty
+                %th.product-list__prices Total
+            %tbody
+              %tr
+                %td.product-list__prices
+                  %p.product-list__price
+                    = number_to_currency(90.00)
+                %td.product-list__quantity
+                  = form_tag nil, class: 'inline-form' do
+                    .inline-form__cell
+                      .value= number_field_tag 'wl_table_cart_item_quantity', 1, min: 1, required: true, class: 'text-box text-box--x-small', data: { form_submitting_control: '' }, title: 'Quantity', id: nil
+                    %p.inline-form__cell.hidden-if-js-enabled= button_tag 'Update', value: 'change_quantity', class: 'button'
+                %td.product-list__prices
+                  %p.product-list__price
+                    = number_to_currency(90.00)
+          .grid.grid--auto.grid--middle
+            = form_tag nil, class: 'grid__cell' do
+              %p= button_tag 'Add to Shopping Bag', class: 'button'
+            = form_tag nil, class: 'grid__cell' do
+              %p= button_tag 'Remove', class: 'text-button'

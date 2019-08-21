@@ -1,0 +1,31 @@
+module Workarea
+  decorate Storefront::UserViewModel, with: 'wish_lists' do
+    def wish_list_items
+      @wish_list_items ||= unpurchased_items.map do |item|
+        product = wish_list_active_products.detect do |active_product|
+          active_product.id == item.product_id
+        end
+
+        if product.present?
+          Storefront::WishListItemViewModel.new(item, product: product)
+        end
+      end.compact
+    end
+
+    private
+
+    delegate :unpurchased_items, to: :wish_list
+
+    def wish_list
+      @wish_list ||= WishList.for_user(id)
+    end
+
+    def wish_list_active_products
+      @wish_list_active_products ||=
+        begin
+          product_ids = unpurchased_items.map(&:product_id)
+          Catalog::Product.find(product_ids).select(&:active?)
+        end
+    end
+  end
+end

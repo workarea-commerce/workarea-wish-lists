@@ -1,0 +1,60 @@
+---
+en:
+  layouts:
+    workarea:
+      storefront:
+        wish_lists_link:
+          your_wish_list: Your Wish List
+  workarea:
+    admin:
+      users:
+        cards:
+          wish_list:
+            button: View Full Wish List
+            empty: There are currently no unpurchased items on this user's wish list.
+            title: Wish List
+        wish_list:
+          item: Item
+          quantity: Quantity
+          state: State
+          title: Wish list for %{user}
+          title_html: Wish list for %{user}
+    storefront:
+      flash_messages:
+        item_moved_to_wish_list: This item has been moved to your wish list
+        wish_list_item_added: This item has been added to your wish list
+        wish_list_item_not_added: 'This item could not be added to your wish list. %{errors}'
+        wish_list_item_removed: This item has been removed from your wish list
+        wish_list_item_updated: This item has been updated on your wish list
+        wish_list_updated: Your wish list has been updated
+      wish_lists:
+        add_to_wish_list: Add to Wish List
+        empty:
+          message: Your wish list has no %{state} items.
+          states:
+            purchased: purchased
+            unpurchased: unpurchased
+        find_instructions: 'Find a friend or family member''s wish list:'
+        find_title: Find a Wish List
+        items: Items
+        location: City, State, or Postal Code
+        manage: Manage Your Wish List
+        move_to_wish_list: Move to Wish List
+        name_or_email: Name or Email
+        no_results: No wish lists found
+        privacy: Privacy
+        private_privacy: 'Private: Only you can see this wish list'
+        public_privacy: 'Public: Anyone can find this wish list'
+        purchased_items: Purchased Items
+        received: Received
+        requested: Requested
+        results: Results
+        share: Share
+        share_message: My Wish List from %{site}
+        shared_privacy: 'Shared: Only people with the link can see this wish list'
+        show: Show
+        show_title: "%{name}'s Wish List"
+        unpurchased_items: Unpurchased Items
+        wish_list: Wish List
+        wish_list_link: Wish List Link
+        wish_list_title: Your Wish List

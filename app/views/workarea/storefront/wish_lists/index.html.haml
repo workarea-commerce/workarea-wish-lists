@@ -1,0 +1,32 @@
+- @title = t('workarea.storefront.wish_lists.find_title')
+
+.view
+
+  %h1= t('workarea.storefront.wish_lists.find_title')
+  %p= t('workarea.storefront.wish_lists.find_instructions')
+
+  - if params[:wish_list_query]
+    %h2= t('workarea.storefront.wish_lists.results')
+
+    - unless @wish_lists.present?
+      %p= t('workarea.storefront.searches.no_results', terms: params[:wish_list_query])
+
+    - else
+      %ol
+        - @wish_lists.each do |wish_list|
+          %li= link_to wish_list.name, wish_list_path(wish_list.token)
+
+    %h2= t('workarea.storefront.searches.search_again')
+
+  = form_tag wish_lists_path, method: 'get', id: 'find_wish_list_form' do
+    .property
+      = label_tag 'name_or_email', nil, class: 'property__name' do
+        %span.property__text= t('workarea.storefront.wish_lists.name_or_email')
+      .value= text_field_tag :wish_list_query, params[:wish_list_query], id: 'name_or_email', class: 'text-box', required: true
+    .property
+      = label_tag :location, nil, class: 'property__name' do
+        %span.property__text= t('workarea.storefront.wish_lists.location')
+        %span.property__requirement.property__requirement--optional= t('workarea.storefront.forms.optional')
+      .value= text_field_tag :location, params[:location], class: 'text-box'
+
+    %p= button_tag t('workarea.storefront.searches.search'), value: 'search', class: 'button'

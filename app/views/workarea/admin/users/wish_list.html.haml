@@ -1,0 +1,26 @@
+- @page_title = t('workarea.admin.users.wish_list.title', user: @user.name)
+
+.view
+  .view__header
+    .grid.grid--middle.grid--center
+      .grid__cell.grid__cell--50
+        .view__heading
+          = link_to_index_for(@user)
+          %h1= t('workarea.admin.users.wish_list.title_html', user: link_to(@user.name, url_for(@user)))
+
+  .view__container
+    = render_cards_for(@user, :wish_list)
+
+  .view__container
+    .browsing-controls.browsing-controls--with-divider.browsing-controls--center.browsing-controls--filters-displayed
+      = form_tag user_wish_list_path(@user), method: 'get', id: 'user_wish_list_form' do
+        .browsing-controls__filter
+          .property.property--inline
+            = label_tag 'state', t('workarea.admin.users.wish_list.state'), class: 'property__name'
+            = select_tag :state, options_for_select(@user.wish_list.state_options, params[:state]), data: { form_submitting_control: '' }
+
+    %p.align-center= pluralize(@user.wish_list.items.count, t('workarea.admin.users.wish_list.item'))
+
+    .grid.grid--auto.grid--flush.grid--center
+      - @user.wish_list.items.each do |item|
+        .grid__cell= render 'workarea/admin/users/wish_list_item_summary', model: item

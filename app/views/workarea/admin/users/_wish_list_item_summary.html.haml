@@ -1,0 +1,8 @@
+.summary
+  = link_to catalog_product_path(model.product) do
+    .summary__image-container
+      = image_tag(product_image_url(model.product.primary_image, :medium), alt: model.name, class: 'summary__image') if model.product.primary_image.present?
+    %span.summary__name= model.name
+    .summary__info-container
+      %span.summary__info #{t('workarea.admin.users.wish_list.quantity')}: #{model.quantity}
+      %span.summary__info= model.sku_name

@@ -1,0 +1,6 @@
+-# TODO v4 remove
+- warn "DEPRECATION WARNING: the location of the `_wish_lists_link.html.haml` partial has moved from `app/views/layout/workarea/storefront/` to `app/views/workarea/storefront/wish_lists/`. Please update your application accordingly, as this file will be removed in the next major release."
+.grid__cell
+  .wish-lists__link
+    = link_to users_wish_list_path do
+      %span= t('layouts.workarea.storefront.wish_lists_link.your_wish_list')

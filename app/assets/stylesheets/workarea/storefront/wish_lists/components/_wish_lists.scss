@@ -1,0 +1,24 @@
+/*------------------------------------*\
+    #WISH-LISTS
+\*------------------------------------*/
+
+/**
+ * 1. Form submit action
+ */
+
+.wish-lists {}
+
+    .wish-lists__link {}
+
+    .wish-lists__section {}
+
+        .wish-lists__public-url {}
+
+            .wish-lists__public-url-name,
+            .wish-lists__public-url-link {
+                margin: 0 0 halve($spacing-unit);
+            }
+
+    .wish-lists__section--settings {}
+    .wish-lists__section--share {}
+    .wish-lists__section--items {}

@@ -1,0 +1,97 @@
+- @title = t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
+
+- content_for :breadcrumbs do
+  %p.breadcrumbs__node-group
+    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }
+      = link_to t('workarea.storefront.layouts.home'), root_path, rel: 'home'
+    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }
+      = link_to t('workarea.storefront.wish_lists.find_title'), wish_lists_path
+    %span.breadcrumbs__node{ itemprop: 'breadcrumb' }= t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
+
+.wish-lists.view
+
+  %h1= t('workarea.storefront.wish_lists.show_title', name: @wish_list.name)
+
+  .wish-lists__section
+
+    .browsing-controls
+      = form_tag wish_list_path(params[:id]), method: :get, class: 'browsing-controls__form' do
+        %p.browsing-controls__form-item.property
+          = label_tag :state, nil, class: 'property__name' do
+            %span.property__text= t('workarea.storefront.wish_lists.show')
+          %span.value= select_tag :state, options_for_select(@wish_list.state_options, params[:state]), data: { form_submitting_control: '' }
+        %p.browsing-controls__form-item.hidden-if-js-enabled= button_tag t('workarea.storefront.forms.go'), class: 'button'
+
+    - if @wish_list.items.empty?
+
+      %p= @wish_list.empty_text
+
+    - else
+
+      %ul.product-list
+        - @wish_list.items.each do |item|
+          %li.product-list__item
+            .product-list__item-cell
+              .product-list__summary
+                %p.product-list__media= link_to image_tag(product_image_url(item.primary_image, :small_thumb), alt: item.name, class: 'product-list__media-image'), product_url(item.product, sku: item.sku), class: 'product-list__media-link'
+                .product-list__info
+                  %p.product-list__name= link_to item.name, product_path(item.product, sku: item.sku)
+                  %p.product-list__id= item.sku_name
+                  %p= item.inventory_status
+                  - if item.has_options?
+                    .product-list__option-group
+                      - item.details.each do |name, value|
+                        %p.product-list__option #{name.titleize}: #{value}
+                      - item.customizations.each do |name, value|
+                        %p.product-list__option #{name.titleize}: #{value}
+            = form_tag cart_items_path, class: 'product-list__item-cell', data: { dialog_form: { dialogOptions: { closeAll: true, initModules: true } }, analytics: add_to_cart_analytics_data(item.product).to_json } do
+              = hidden_field_tag :product_id, item.product_id, id: nil
+              = hidden_field_tag :sku, item.sku, id: nil
+              - item.customizations.each do |param, value|
+                = hidden_field_tag param, value, id: nil
+              %table.table
+                %thead
+                  %tr
+                    %th.table__prices= t('workarea.storefront.orders.price')
+                    %th.table__quantity= t('workarea.storefront.wish_lists.requested')
+                    %th.table__quantity= t('workarea.storefront.wish_lists.received')
+                    %th.table__quantity= t('workarea.storefront.orders.quantity')
+                    %th.table__prices= t('workarea.storefront.orders.total')
+                %tbody
+                  %tr
+                    %td.table__prices
+                      - if item.on_sale?
+                        %p.table__price
+                          %span.table__price-label= t('workarea.storefront.orders.price_now')
+                          %strong.table__price-discount.wish-lists__public-item-price= number_to_currency(item.unit_price, exchange: false)
+                        %p.table__price
+                          %span.table__price-label= t('workarea.storefront.orders.price_was')
+                          %s= number_to_currency(item.original_price, exchange: false)
+                      - else
+                        %p.table__price
+                          %span.wish-lists__public-item-price= number_to_currency(item.unit_price, exchange: false)
+                      - if item.customized?
+                        %p.table__price
+                          %span.table__price-label= t('workarea.storefront.orders.customizations')
+                          %span= number_to_currency item.customizations_unit_price
+                    %td.table__quantity= item.quantity
+                    %td.table__quantity= item.received
+                    %td.table__quantity
+                      .value= number_field_tag :quantity, item.quantity, class: 'text-box text-box--x-small wish-lists__public-quantity-field', min: 1, id: nil
+                    %td.table__prices
+                      - if item.total_adjustments.many?
+                        %p.table__price
+                          %span.table__price-label= t('workarea.storefront.orders.subtotal')
+                          %span= number_to_currency item.prediscount_price
+                        - item.total_adjustments.each do |adjustment|
+                          %p.table__price
+                          %span= adjustment.description.titleize
+                          %span= number_to_currency(adjustment.amount)
+                      %p.table__price
+                        %span.wish-lists__public-total-price= number_to_currency(item.total_price, exchange: false)
+              .grid.grid--auto.grid--middle
+                .grid__cell
+                  - if item.purchasable?
+                    %p= button_tag t('workarea.storefront.products.add_to_cart'), class: 'button'
+                  - else
+                    %p.unavailable= t('workarea.storefront.products.unavailable')

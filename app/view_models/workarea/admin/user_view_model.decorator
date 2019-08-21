@@ -1,0 +1,12 @@
+module Workarea
+  decorate Admin::UserViewModel, with: :wish_lists do
+
+    def wish_list
+      @wish_list ||=
+        Storefront::WishListViewModel.new(
+          Workarea::WishList.for_user(model.id),
+          options
+        )
+    end
+  end
+end
