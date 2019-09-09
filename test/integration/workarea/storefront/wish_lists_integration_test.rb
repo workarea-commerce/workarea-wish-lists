@@ -194,7 +194,7 @@ module Workarea
 
         assert_redirected_to(storefront.login_path)
         refute_empty(order.reload.items)
-        assert_equal(item.id.to_s, session[:wish_list_item_id])
+        assert(cookies[:wish_list_item_id].present?)
 
         login
 
@@ -203,7 +203,7 @@ module Workarea
         follow_redirect!
 
         assert_response(:success)
-        refute(session.key?(:wish_list_item_id))
+        assert(cookies[:wish_list_item_id].blank?)
         assert_empty(order.reload.items)
       end
     end
