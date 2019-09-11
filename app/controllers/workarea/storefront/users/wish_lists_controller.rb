@@ -70,8 +70,9 @@ module Workarea
       private
 
       def require_login_and_redirect
-        remember_location(users_wish_list_path) unless logged_in?
-        require_login
+        result = require_login
+        remember_location(users_wish_list_path) if result == false
+        result
       end
 
       def current_wish_list
@@ -88,18 +89,18 @@ module Workarea
       end
 
       def add_item_from_session
-        item_id = session[:wish_list_item_id]
+        item_id = cookies[:wish_list_item_id]
 
         wish_list_session.add_item(current_wish_list)
-        current_order.remove_item(item_id) if item_id.present?
+        current_order.remove_item(item_id) if current_order.items.where(id: item_id).present?
       end
 
       def wish_list_session
-        WishListSession.new(session)
+        WishListSession.new(cookies)
       end
 
       def item_stored_in_session?
-        session.key?(:wish_list_product_id)
+        cookies.key?(:wish_list_product_id)
       end
 
       def customizations
