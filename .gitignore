@@ -11,3 +11,4 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 node_modules
 test/reports
+.rubocop-http*
