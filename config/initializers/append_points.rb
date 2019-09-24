@@ -42,6 +42,11 @@ Workarea.append_partials(
 )
 
 Workarea.append_partials(
+  'storefront.robots_txt',
+  'workarea/storefront/pages/wish_lists_robots'
+)
+
+Workarea.append_partials(
   'admin.user_cards',
   'workarea/admin/users/wish_list_card'
 )
