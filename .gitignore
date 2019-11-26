@@ -11,4 +11,5 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 node_modules
 test/reports
+yarn.lock
 .rubocop-http*
