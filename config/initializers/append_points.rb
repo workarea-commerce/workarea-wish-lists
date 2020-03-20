@@ -55,3 +55,8 @@ Workarea.append_partials(
   'admin.reports_dashboard',
   'workarea/admin/dashboards/wish_list_products_card'
 )
+
+Workarea.append_partials(
+  'admin.user_index_aux_navigation',
+  'workarea/admin/users/wishlist_import__export_nav'
+)
