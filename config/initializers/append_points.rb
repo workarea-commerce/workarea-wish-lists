@@ -58,5 +58,5 @@ Workarea.append_partials(
 
 Workarea.append_partials(
   'admin.user_index_aux_navigation',
-  'workarea/admin/users/wishlist_import__export_nav'
+  'workarea/admin/users/wishlist_import_export_nav'
 )
