@@ -1,3 +1,13 @@
+Workarea Wish Lists 3.1.1 (2020-03-26)
+--------------------------------------------------------------------------------
+
+*   Add wishlist import and export functionality to users index page
+
+    WISHLISTS-3
+    Jeff Yucis
+
+
+
 Workarea Wish Lists 3.0.1 (2019-04-16)
 --------------------------------------------------------------------------------
 
