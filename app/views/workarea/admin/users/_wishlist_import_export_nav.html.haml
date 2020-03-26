@@ -1,0 +1,9 @@
+.grid.grid--auto.grid--right.grid--middle
+  .grid__cell= link_to t('workarea.admin.users.wish_list_import_export_nav.wish_lists'), '#export-wish-lists', data: { tooltip: { interactive: true, side: 'bottom' } }
+
+#export-wish-lists.tooltip-content
+  %p= t('workarea.admin.users.wish_list_import_export_nav.description')
+  .align-center
+    = link_to t('workarea.admin.users.wish_list_import_export_nav.import'), new_data_file_import_path(model_type: Workarea::WishList), return_to: users_path, class: 'text text--bold'
+    %span= t('workarea.admin.users.wish_list_import_export_nav.or')
+    = link_to t('workarea.admin.users.wish_list_import_export_nav.export'), new_data_file_export_path(model_type: Workarea::WishList), return_to: users_path, class: 'text text--bold'

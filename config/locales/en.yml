@@ -19,6 +19,12 @@ en:
           state: State
           title: Wish list for %{user}
           title_html: Wish list for %{user}
+        wish_list_import_export_nav:
+          description: You can bulk import and export wish lists here. To see a specific account's wish list, visit their detail page from the table below.
+          export: Export
+          import: Import
+          or: or
+          wish_lists: Wish Lists
       fields:
         adds: Adds
         deletes: Deletes
