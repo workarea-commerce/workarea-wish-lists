@@ -17,7 +17,7 @@ module Workarea
       end
 
       def update
-        current_wish_list.update_attributes(params.permit(:privacy))
+        current_wish_list.update(params.permit(:privacy))
         flash[:success] =
           t('workarea.storefront.flash_messages.wish_list_updated')
         redirect_to users_wish_list_path
