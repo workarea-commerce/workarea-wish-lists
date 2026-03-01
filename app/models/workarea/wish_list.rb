@@ -152,7 +152,7 @@ module Workarea
     def update_item_quantity(item_id, quantity)
       item = items.where(id: item_id).first
       return false if item.nil?
-      item.update_attributes(quantity: quantity)
+      item.update(quantity: quantity)
     end
 
     # Mark the items as being purchased
